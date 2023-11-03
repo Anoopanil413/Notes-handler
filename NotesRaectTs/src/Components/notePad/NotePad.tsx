@@ -1,6 +1,7 @@
 import React, { FormEvent, useRef } from 'react'
 import { NoteData } from '../../App'
 import { useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid';
 
 type NotesType = {
     submitingNote: (data: NoteData) => void
@@ -15,12 +16,18 @@ const NotePad = ({ submitingNote }: NotesType) => {
         e.preventDefault()
         let noteTitle = titleRef.current!.value
         let noteContent = textAreaRef.current!.value
-        if(noteTitle.trim.length!==0&&noteContent.trim.length!==0){
+
+
+
+        if (noteTitle.trim().length !== 0 && noteContent.trim().length !== 0) {
+            console.log(noteContent.trim().length)
+            const newUUID: string = uuidv4();
 
             submitingNote({
                 title: titleRef.current!.value,
                 content: textAreaRef.current!.value,
-                date: new Date
+                date: new Date,
+                id: newUUID
             })
         }
         navigate('/')

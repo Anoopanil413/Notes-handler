@@ -4,16 +4,19 @@ import './App.css'
 import { Home } from './Pages/Home'
 import Notes from './Pages/Notes'
 import { useLocalStorage } from './customHooks/useLocalStorage'
+import ViewNote from './Components/viewNotes/ViewNote'
 
 export type NoteData = {
   title: String,
   content: String,
-  date?: Date
+  date?: Date,
+  id:string
 }
 
 interface NoteDataByDate {
   [date: string]: NoteData[];
 }
+
 
 function App() {
   let [myNotes, setMyNotes] = useLocalStorage<{ [date: string]: NoteData[] }>("NOTES", {})
@@ -27,7 +30,7 @@ function App() {
 
   function onCreate(data: NoteData) {
     setMyNotes((prevNotes) => {
-      const date = data.date ? data.date.toDateString() : 'No Date';
+      const date = data.date ? data.date.toISOString().split('T')[0] : 'No Date';
       return {
         ...prevNotes,
         [date]: [...(prevNotes[date] || []), data],
@@ -39,15 +42,17 @@ function App() {
     const jsonData = localStorage.getItem('NOTES')
     const todayDate: Date = new Date()
     const todaysDateString: string = todayDate.toISOString().split('T')[0];
+    console.log(todaysDateString)
 
     if (jsonData === null || jsonData === 'undefined') {
       alert("Lets start creating jotes")
     } else {
       const parsedData: NoteDataByDate = JSON.parse(jsonData);
       if (!parsedData || Object.keys(parsedData).length === 0) {
-        alert('No notes created for today');
+        alert('No notes created');
       } else if (parsedData[todaysDateString]) {
         const todaysNotes = parsedData[todaysDateString];
+        console.log("This is notes for today", todaysNotes)
         setMyExistingNotes(todaysNotes)
       }
     }
@@ -58,8 +63,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home mylistingNotes={mysetNotes} />} />
         <Route path='/create' element={<Notes noteHandler={onCreate} />} />
+        <Route path='/view' element={<ViewNote />} />
       </Routes>
 
 

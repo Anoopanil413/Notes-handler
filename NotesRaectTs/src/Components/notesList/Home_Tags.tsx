@@ -17,10 +17,7 @@ const Home_Tags = () => {
                         <span className="inline-block bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Sort by Date</span>
 
                     </div>
-                    {/* <div>
-
-                        <span className="inline-block  bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">travel</span>
-                    </div> */}
+         
                     <div className='w-auto hidden lg:block '>
                         <Search_Bar />
                     </div>

@@ -1,7 +1,20 @@
 import React from 'react'
 import Meteor from '../mymeteor/Meteor'
+import { NoteData } from '../../App'
+import { useNavigate } from 'react-router-dom';
 
-const Test_comp = () => {
+
+
+
+
+
+const Test_comp = ({ listingnotes }: { listingnotes: NoteData }) => {
+
+    const navigate = useNavigate();
+    const handleRead = (readValue: NoteData): void => {
+        navigate('/view', { state: { readValue } });
+    }
+
     return (
         <div>
             <div className=" h-auto m-3">
@@ -10,19 +23,18 @@ const Test_comp = () => {
                     <div className="relative shadow-xl bg-gray-900 border border-gray-800  px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
 
 
-                        <h1 className="font-bold text-xl text-white mb-0 mt-1 relative z-40">
-                            Meteors because they're cool
+                        <h1 className=" font-bold text-xl text-white mb-0 mt-1 relative z-40">
+                            {listingnotes.title}
                         </h1>
                         <h4 className='text-gray-50 underline'>
-                            Created Date: 29/10
+                            Created Date: {listingnotes.date ? new Date(listingnotes.date).toDateString() : 'N/A'}
                         </h4>
 
-                        <p className="font-normal text-ellipsis overflow-hidden  text-base mr-2 text-slate-300 mb-3 relative z-40">
-                            I don't know what to write so I'll just paste something cool here.
-                            One more sentence because lorem ipsum is just unacceptable.
+                        <p className="m-1 font-normal text-base mr-2 text-slate-300 mb-3 relative z-40 h-[3rem] overflow-hidden line-clamp-2">
+                            {listingnotes.content}
                         </p>
                         <div className='flex flex-row gap-3'>
-                            <button className="border px-4 py-1 rounded-lg !text-sm  border-gray-500 text-gray-300 hover:border-white">
+                            <button onClick={() => handleRead(listingnotes)} className="border px-4 py-1 rounded-lg !text-sm  border-gray-500 text-gray-300 hover:border-white">
                                 Read
                             </button>
                             <button className="border px-4 py-1 rounded-lg !text-sm  border-gray-500 text-blue-300 hover:border-blue-700">

@@ -24,17 +24,17 @@ const Drop_Down = () => {
             {isOpen && (
                 <ul className="absolute max-w-max top-10 right-0 bg-white border shadow-md z-50">
                     <li>
-                        <a href="#" className="block sm:w-60 md:w-60 lg:w-72 px-4 py-2 hover:bg-gray-200 z-50">
+                        <a href="/" className="block sm:w-60 md:w-60 lg:w-72 px-4 py-2 hover:bg-gray-200 z-50">
                             Logout hello
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="block sm:w-60 md:w-60 lg:w-72 px-4 py-2 hover:bg-gray-200">
+                        <a href="/" className="block sm:w-60 md:w-60 lg:w-72 px-4 py-2 hover:bg-gray-200">
                             My Notes
                         </a>
                     </li>
                     <li>
-                        <a href="#" className=" block sm:w-60 md:w-60 lg:w-72 px-4 py-2 hover:bg-gray-200 z-50">
+                        <a href="" className=" block sm:w-60 md:w-60 lg:w-72 px-4 py-2 hover:bg-gray-200 z-50">
                             Option
                         </a>
                     </li>
